@@ -42,7 +42,7 @@ const bupUpgradeCosts = [
   Infinity,Infinity,8e8,1e11,
   Infinity,Infinity,2e19,1e21
 ];
-const slugMile = [1e10, 20, 15, 12, 10, 1, -1];
+const slugMile = [1e100, 200, 150, 120, 100, 10, 1];
 let totalMult = 1;
 let buptotalMute = 1;
 const challengeGoals = [
@@ -56,18 +56,18 @@ const challengeGoals = [
   [3.0e10, 6.0e10, 2.4e11, Infinity],
   [Infinity,Infinity,Infinity]
 ];
-const challengeCurve = [0, 0.5, 0.75, 1];
+const challengeCurve = [0, 0, 0, 0];
 let partOP = 0;
 let factorBoostLoop = 0;
 let cardinalLoop = ExpantaNum(0);
 /* eslint-disable */
 let collapseAnimation = 0;
 /* eslint-enable */
-const iupCosts = [1e5, 1e3, 1e9, 5e15, 2e22, 4e23, 1e19, 1e25, 1e27];
+const iupCosts = [0e5, 0e3, 0e9, 0e15, 0e22, 0e23, 0e19, 0e25, 0e27];
 const dupCosts = [
-  5,
-  1000,
-  9,
+  0,
+  0,
+  0,
   Infinity,
   Infinity,
   Infinity,
@@ -95,18 +95,18 @@ const musicName = [
   "Lesion X - A Journey Through The Universe (https://soundcloud.com/lesionxbeats) [CC BY 3.0]"
 ];
 const aupCost = [
-  1,
-  2,
-  4,
-  8,
-  16,
-  256,
-  65536,
-  2 ** 32,
-  2 ** 64,
-  2 ** 128,
-  2 ** 256,
-  2 ** 512
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0 ** 32,
+  0 ** 64,
+  0 ** 128,
+  0 ** 256,
+  0 ** 512
 ];
 let AF = 0;
 const d = new Date();
@@ -141,16 +141,16 @@ function updateAchs() {
 
 function increment(manmade = 0) {
 
-  if (manmade === 0 || game.manualClicksLeft >= 0.5) {
+  if (manmade === 0 || true) {
     if (
       manmade === 1 &&
       (inChal(6)||inChal(7)||inChal(8))
     )
       game.manualClicksLeft--;
     if (game.ord % game.base === game.base - 1) {
-      game.over++;
+      game.over += 100000;
     } else {
-      game.ord++;
+      game.ord += 100000;
     }
     clickCoolDown = 2;
   }
@@ -255,9 +255,9 @@ function loop(unadjusted, off = 0) {
       completeChallenge();
     }
   }
-  if (game.chal8 === 1 && calcRefund() > 0 && game.omegaChallenge != 1) // no touch this one
+  if (game.chal8 === 1 && calcRefund() > 0 && false) // no touch this one
     confirm("You failed Challenge 8 because you had booster upgrades on you!");
-  if ((game.chal8 === 1) && calcRefund() > 0 && game.omegaChallenge != 1) refund(); // no touch this, softlocks
+  if ((game.chal8 === 1) && calcRefund() > 0 && false) refund(); // no touch this, softlocks
   game.boosters =
     ((game.factorBoosts * (game.factorBoosts + 1)) / 2 + Math.round(Math.max(getSumOC(),1)*(calcSlugMile() + getBaseless()))) -
     calcRefund();
@@ -303,7 +303,6 @@ function loop(unadjusted, off = 0) {
     game.incrementy = game.incrementy.add(getIncrementyRate(ms / 2));
   }
   changeDynamic(ms);
-  if (game.dynamic < 0) game.dynamic = 0;
   if (inChal(8)) game.decrementy += getDecrementyRate(ms); //oof, sniped I WAS SUPPOSED TO DO c8 re
   if (game.boostUnlock == 1 && game.limAuto === 0) game.limAuto = 1;
   totalMult = factorMult * calcTotalMultWOFactor();
